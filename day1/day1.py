@@ -9,33 +9,14 @@ def readFile():
             listOfWords.append(line)
 
 def checkDigit(string):
-    print(string)
-    
-    #state = 0
-    #for key in ints:
-    #    if key in string:
-    #        state += 1
-    #if state == 0:
-    #    return
-    ##print("working")
-    #for key in ints:
-    #    for i in range (0, len(string) - 1):
-    #        for k in range (i, len(string) - 1):
-    #            if key in string[i : k]:
-    #                string = string[: k] + str(ints[key]) + string[k:]
     state = False
     for key, value in ints.items():
         for i in range (0, len(string)):
             for k in range (i, len(string)):
                 if key in string[i : k+1]:
                     string = string[: k] + str(ints[key]) + string[k:]
-
-                
-        #if key in string:
-        #    string = string.replace(key, str(value))
+                    break
     listOfIntWords.append(string)
-    print(string)
-    print(calcVal(string))
 
 
 def calcVal(string):
@@ -53,12 +34,9 @@ def calcVal(string):
 def loopFile():
     sum = 0
     for word in listOfWords:
-        #print(word)
         checkDigit(word)
 
     for word in listOfIntWords:
-        #print(word)
-        #print(int(calcVal(word)))
         sum += int(calcVal(word))
     return sum
 
