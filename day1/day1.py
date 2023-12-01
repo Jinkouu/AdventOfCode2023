@@ -13,16 +13,15 @@ def checkDigit(string):
     for key, value in ints.items():
         for i in range (0, len(string)):
             for k in range (i, len(string)):
-                if key in string[i : k+1]:
+                if key in string[i : k+1]: # basically place the int 1 before the end to account for things like sevenine being 79 = seve7nin9e
                     string = string[: k] + str(ints[key]) + string[k:]
                     break
     listOfIntWords.append(string)
 
-
 def calcVal(string):
     queue = deque()
     for char in string:
-        if char.isnumeric():
+        if char.isnumeric(): # places all ints into a queue in order to get the first and last accordingly
             queue.append(char)
     if len(queue) == 0:
         return 0
@@ -30,9 +29,17 @@ def calcVal(string):
         return int(queue[0] + queue[0]) 
     elif len(queue) >= 2:
         return int(queue[0] + queue[len(queue) - 1])
-
-def loopFile():
+    
+def part1():
     sum = 0
+    readFile()
+    for word in listOfWords:
+        sum += int(calcVal(word))
+    return sum
+
+def part2():
+    sum = 0
+    readFile()
     for word in listOfWords:
         checkDigit(word)
 
@@ -40,5 +47,10 @@ def loopFile():
         sum += int(calcVal(word))
     return sum
 
-readFile()
-print(loopFile())
+def clear():
+    listOfWords.clear()
+    listOfIntWords.clear()
+
+print("Part 1: ", part1())
+clear()
+print("Part 2: ", part2())
