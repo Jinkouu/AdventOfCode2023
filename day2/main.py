@@ -44,10 +44,17 @@ def findGame(red, green, blue):
     for dict in listOfGames:
         if dict["red"] <= red and dict["blue"] <= blue and dict["green"] <= green:
             sum += dict["game"]
-            p#rint(dict)
+            #print(dict)
+    return sum
+
+def findSumOfPower():
+    sum = 0
+    for dict in listOfGames:
+        sum+= dict["red"] * dict["blue"] * dict["green"]
     return sum
 
 readFile()
 splitString()
 countColours()
-print(findGame(12, 13, 14))
+print("Part 1: ", findGame(12, 13, 14))
+print("Part 2: ", findSumOfPower())
