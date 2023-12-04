@@ -30,12 +30,12 @@ def splitLists():
         listOfWinningSplit.append(newLine)
 
 def calculateWinnings():
-    for k in range(0, len(listOfIntSplit)):
+    for k in range(0, len(listOfIntSplit)): # for every card
         points = 0
         for i in range (0, len(listOfIntSplit[k])):
             for j in range (0, len(listOfWinningSplit[k])):
                 #print(listOfIntSplit[k][i], listOfWinningSplit[k][j])
-                if int(listOfIntSplit[k][i]) == int(listOfWinningSplit[k][j]):
+                if int(listOfIntSplit[k][i]) == int(listOfWinningSplit[k][j]): #if the numbers match
                     #print(listOfIntSplit[k][i], listOfWinningSplit[k][j])
                     if points == 0:
                         points = 1
@@ -51,21 +51,16 @@ def calculateSum():
     print("part 1:", sum)
 
 def calculateScratches():
-    coppy = [1]*len(listOfIntSplit)
-    for k in range(0, len(listOfIntSplit)):
+    coppy = [1]*len(listOfIntSplit) # initialise coppy list with 1 at index
+    for k in range(0, len(listOfIntSplit)):  # for every card
         copies = 0
         for i in range (0, len(listOfIntSplit[k])):
             for j in range (0, len(listOfWinningSplit[k])):
-                if int(listOfIntSplit[k][i]) == int(listOfWinningSplit[k][j]):
+                if int(listOfIntSplit[k][i]) == int(listOfWinningSplit[k][j]): #if the numbers match add 1 copy count
                     copies += 1
-        while copies > 0:
-            coppy[k+copies] += 1 *coppy[k]
+        while copies > 0: #for every coppy, update the list using dynamic programming
+            coppy[k+copies] += 1 *coppy[k] 
             copies -= 1
-            #scratchCards["game " + str(z)] = scratchCards.get("game " + str(z), 0) + 1
-        #for z in range(k, k + copies - 1):
-        #    scratchCards[z] = scratchCards.get(z, 0) + 1
-        #listOfWinnings.append(copies)
-        #copies = 0
     print(sum(coppy))
 
 readFile()
