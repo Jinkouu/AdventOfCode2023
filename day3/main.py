@@ -36,6 +36,9 @@ def findInts():
                 if currNum:
                     listOfCoords.append(((row, col - len(currNum)), (row, col-1), currNum))
                     currNum = ""
+        if currNum:
+            listOfCoords.append(((row, col - len(currNum)), (row, col - 1), currNum))
+            currNum = ""
             #x = len(listOfChars[row][col])
             #print(listOfChars[row][col])
     #print(listOfCoords)
@@ -52,14 +55,18 @@ def searchAround():
         endY = element[1][1]
         #print(startX, startY, endX, endY)
         #print(height, width)
-        if (startX - 1) > 0: #if left isnt out of bounds, increase search area
-            startX -= 1
-        if (startY - 1) > 0: #if top isnt out of bounds, increase search area
-            startY -= 1
-        if (endX + 1) <= (width): # if right isnt out of bounds, increase search area
-            endX += 1
-        if (endY + 1) <= (height): # if bottom isnt out of bounds, increase search area
-            endY += 1
+        startX = max(startX - 1, 0)
+        startY = max(startY - 1, 0)
+        endX = min(endX + 1, width)
+        endY = min(endY + 1, height)
+        #if (startX - 1) > 0: #if left isnt out of bounds, increase search area
+        #    startX -= 1
+        #if (startY - 1) > 0: #if top isnt out of bounds, increase search area
+        #    startY -= 1
+        #if (endX + 1) <= (width): # if right isnt out of bounds, increase search area
+        #    endX += 1
+        #if (endY + 1) <= (height): # if bottom isnt out of bounds, increase search area
+        #    endY += 1
         print(startX, startY, endX, endY)
         for row in range (startX, endX+1):
             for col in range(startY, endY+1):
@@ -76,12 +83,13 @@ def sumOfParts():
     #print(parts)
     sum = 0
     for key in parts:
-        sum += int(key)
+        #sum += int(key)
+        sum += int(key)*parts[key]
     print(sum)
 
 
-def prints():
-    print(listOfCoords)
+#def prints():
+    #print(listOfCoords)
 
 #def checkAdjacent(row, col):
     #for r, c in listOfChars:
