@@ -28,7 +28,15 @@ def findInts():
     #print(listOfCoords)
 
 def searchAround():
-    for
+    for element in listOfCoords:
+        #start = element[0]
+        startX = element[0][0]
+        startY = element[0][1]
+        #end = element[1]
+        endX = element[1][0]
+        endY = element[1][1]
+        print(startX, startY, endX, endY)
+
 
 def prints():
     print(listOfCoords)
@@ -41,5 +49,6 @@ def prints():
 
 readFile()
 findInts()
-prints()
+searchAround()
+#prints()
 
