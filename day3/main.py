@@ -5,6 +5,7 @@ listOfChars = []
 listOfCoords = []
 symbols = {}
 parts = {}
+ratio = []
 currNum = ""
 
 
@@ -67,7 +68,7 @@ def searchAround():
         #    endX += 1
         #if (endY + 1) <= (height): # if bottom isnt out of bounds, increase search area
         #    endY += 1
-        print(startX, startY, endX, endY)
+        #print(startX, startY, endX, endY)
         for row in range (startX, endX+1):
             for col in range(startY, endY+1):
                 #print(row, col)
@@ -87,20 +88,49 @@ def sumOfParts():
         sum += int(key)*parts[key]
     print(sum)
 
+def part2():
+    ratioCoord = {}
+    for element in listOfCoords:
+        startX, startY = element[0]
+        endX, endY = element[1]
 
-#def prints():
-    #print(listOfCoords)
+        elements = 0
 
-#def checkAdjacent(row, col):
-    #for r, c in listOfChars:
-    #    if listOfChars[r][c] == listOfChars[row][col]:
-    #        print("true")
+        for row in range(startX - 1, endX + 2):
+            for col in range(startY - 1, endY + 2):
+                if 0 <= row < len(listOfChars) and 0 <= col < len(listOfChars[0]) and listOfChars[row][col] == '*': # if another number in within the range of *
+                    ratioCoordKey = (row, col)
+                    if ratioCoordKey not in ratioCoord:
+                        ratioCoord[ratioCoordKey] = int(element[2])
+                    else:
+                        ratioCoord[ratioCoordKey] *= int(element[2])
+
+    toDelete = []
+    for ratio in ratioCoord:
+        for element in listOfCoords:
+            #print(ratioCoord[ratio], element[2])
+            if int(element[2]) == int(ratioCoord[ratio]):
+                if ratio not in toDelete:
+                    toDelete.append(ratio)
+                #print(ratioCoord[ratio], element[2])
+                
+                #ratioCoord.pop(ratio)
+    for element in toDelete:
+        #print(element)
+        ratioCoord.pop(element)
+
+    sum = 0
+    for element in ratioCoord:
+        sum += ratioCoord[element]
+    print(sum)
+
 
 
 readFile()
 findSymbols()
 findInts()
 searchAround()
-sumOfParts()
+#sumOfParts()
+part2()
 #prints()
 
