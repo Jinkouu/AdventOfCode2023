@@ -3,6 +3,7 @@ import re
 
 listOfChars = []
 listOfCoords = []
+symbols = {}
 currNum = ""
 
 
@@ -12,6 +13,17 @@ def readFile():
             newLine = lines.strip()
             listOfChars.append([(line) for line in newLine])
     #print(listOfChars)
+
+def findSymbols():
+    for row in range(len(listOfChars)):
+        for col in range(len(listOfChars[row])):
+            if listOfChars[row][col] not in "0123456789.":
+                sym = listOfChars[row][col]
+                if sym in symbols:
+                    symbols[sym] += 1
+                else:
+                    symbols[sym] = 1
+    #print(symbols)
 
 def findInts():
     currNum = ""
@@ -35,7 +47,16 @@ def searchAround():
         #end = element[1]
         endX = element[1][0]
         endY = element[1][1]
-        print(startX, startY, endX, endY)
+        if (startX - 1) > 0: #if left isnt out of bounds, increase search area
+            startX -= 1
+        if (startY - 1) > 0: #if top isnt out of bounds, increase search area
+            startY -= 1
+        if (endX + 1) < len(listOfCoords[0]): # if right isnt out of bounds, increase search area
+            endX += 1
+        if (endY + 1) < len(listOfCoords): # if bottom isnt out of bounds, increase search area
+            endY += 1
+        
+        
 
 
 def prints():
@@ -48,6 +69,7 @@ def prints():
 
 
 readFile()
+findSymbols()
 findInts()
 searchAround()
 #prints()
