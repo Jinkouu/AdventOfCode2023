@@ -68,11 +68,15 @@ def run():
     for seed in seeds:
         calcSeed(int(seed))
 
+def seed(seedNum, sourceNum, range):
+    if 
+
+
 def calcSeed(seedNum):
     for seedMap in seedList:
-        if seedMap[1] == seedNum:
-            print("continue")
-        else:
+        #if seedMap[1] == seedNum:
+        #    print("continue")
+        #else:
 
 
 
