@@ -4,7 +4,7 @@ rank = "AKQJT987654321"
 entries = []
 
 def readFile():
-    with open("day7\\test.txt") as input:
+    with open("day7\\input.txt") as input:
         for lines in input:
             newLine = lines.strip()
             newLine = newLine.split(' ')
@@ -46,16 +46,16 @@ def readFile():
     #print(entries)
 
 def calcHigher(card1, card2):
-    if rank.index(card1[0]) > rank.index(card2[0]):
+    if rank.index(card1[0]) < rank.index(card2[0]):
         return True
-    #if rank.index(card1[1]) > rank.index(card2[1]):
-    #    return True
-    #if rank.index(card1[2]) > rank.index(card2[2]):
-    #    return True
-    #if rank.index(card1[3]) > rank.index(card2[3]):
-    #    return True
-    #if rank.index(card1[4]) > rank.index(card2[4]):
-    #    return True
+    if rank.index(card1[1]) < rank.index(card2[1]):
+        return True
+    if rank.index(card1[2]) < rank.index(card2[2]):
+        return True
+    if rank.index(card1[3]) < rank.index(card2[3]):
+        return True
+    if rank.index(card1[4]) < rank.index(card2[4]):
+        return True
     else:
         return False
 
@@ -63,28 +63,30 @@ def sort():
     #sorting algorithm
     semisort = sorted(entries, key=lambda x: x[1])
     print(semisort)
-    swapped = False
     n = len(semisort)
     for i in range(n):
+        swapped = False
         for j in range(0, n - i - 1):
-            #if semisort[j][1] == semisort[j+1][1]:
+            if semisort[j][1] == semisort[j+1][1]:
                 #print(semisort)
                 #print(semisort[j][0][0], semisort[j][0][1])
-                print(semisort[j][0][0])
-            #if(semisort[j][0][0] > semisort[j+1][0][0]):
+                #print(semisort[j][0][0])
+            #if(rank.index(semisort[j][0][0]) < rank.index(semisort[j+1][0][0]) and semisort[j][1] == semisort[j+1][1]):
+                #if calcHigher(semisort[j][0], semisort[j + 1][0]):
+                    semisort[j], semisort[j + 1] = semisort[j+1], semisort[j]
+                    swapped = True   
             #if calcHigher(semisort[j][0], semisort[j + 1][0]):
                 #print(semisort[j][0], semisort[j + 1][0])
-                semisort[j], semisort[j + 1] = semisort[j+1], semisort[j]
-                swapped = True   
-        if not swapped:
-            return
+                
+        if (swapped == False):
+            break
     print(semisort)
-    #sum = 0
-    #for i in range(len(semisort)):
-    #    #print(semisort[i][2], int(semisort[i][2])*(i+1))
-    #    sum += int(semisort[i][2])*(i+1)
-    #        
-    #print(sum)
+    sum = 0
+    for i in range(len(semisort)):
+        #print(semisort[i][2], int(semisort[i][2])*(i+1))
+        sum += int(semisort[i][2])*(i+1)
+            
+    print(sum)
 
 readFile()
 sort()
