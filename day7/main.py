@@ -1,6 +1,5 @@
 #a k q j t 9 8 7 6 5 4 3 2 1
 #order = {'A' : 14, 'K' : 13, 'Q' : 12, 'J' : 11, 'T' : 10, '9' : 9, '8' : 8, '7' : 7, '6' : 6, '5' : 5, '4' : 4, '3' : 3, '2' : 2, '1' : 1}
-rank = "AKQJT987654321"
 entries = []
 
 def readFile():
@@ -45,41 +44,28 @@ def readFile():
             entries.append((newLine[0], type, newLine[1]))
     #print(entries)
 
+rank = "AKQJT987654321"
+
 def calcHigher(card1, card2):
-    if rank.index(card1[0]) < rank.index(card2[0]):
-        return True
-    if rank.index(card1[1]) < rank.index(card2[1]):
-        return True
-    if rank.index(card1[2]) < rank.index(card2[2]):
-        return True
-    if rank.index(card1[3]) < rank.index(card2[3]):
-        return True
-    if rank.index(card1[4]) < rank.index(card2[4]):
-        return True
-    else:
-        return False
+    for char1, char2 in zip(card1, card2):
+        if rank.index(char1) > rank.index(char2):
+            return True
+        elif rank.index(char1) < rank.index(char2):
+            return False
+    return False
 
 def sort():
     #sorting algorithm
     semisort = sorted(entries, key=lambda x: x[1])
-    print(semisort)
-    n = len(semisort)
-    for i in range(n):
-        swapped = False
-        for j in range(0, n - i - 1):
-            if semisort[j][1] == semisort[j+1][1]:
-                #print(semisort)
-                #print(semisort[j][0][0], semisort[j][0][1])
-                #print(semisort[j][0][0])
-            #if(rank.index(semisort[j][0][0]) < rank.index(semisort[j+1][0][0]) and semisort[j][1] == semisort[j+1][1]):
-                #if calcHigher(semisort[j][0], semisort[j + 1][0]):
-                    semisort[j], semisort[j + 1] = semisort[j+1], semisort[j]
-                    swapped = True   
-            #if calcHigher(semisort[j][0], semisort[j + 1][0]):
-                #print(semisort[j][0], semisort[j + 1][0])
-                
-        if (swapped == False):
-            break
+    #print(semisort)
+    for i in range(1, len(semisort)):
+        key = semisort[i]
+        j = i - 1
+        while(j >= 0 and calcHigher(key[0], semisort[j][0]) and key[1] == semisort[j][1]):
+            semisort[j+1] = semisort[j]
+            j-=1
+        semisort[j + 1] = key
+
     print(semisort)
     sum = 0
     for i in range(len(semisort)):
