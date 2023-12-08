@@ -31,8 +31,8 @@ def readFile():
 #            return route
 #    return
 
-def calcSteps():
-    currentKey = "AAA"
+def calcSteps(currentKey):
+    
     current = traversal[currentKey]
     steps = 0
     finished = False
@@ -54,8 +54,40 @@ def calcSteps():
                 finished = True
                 return steps
 
+def calcSteps2():
+    startPoints = []
+    for key in traversal.keys():
+        if key[2] == "A":
+            startPoints.append(key)
+    print(startPoints)
+
+    finished = False
+    steps = 0
+
+    while finished == False:
+        for direction in inp:
+            temp = []
+            for key in startPoints:
+                #print(key)
+                if "L" in direction:
+                    newKey = traversal[key][0]
+                else:
+                    newKey = traversal[key][1]
+                temp.append(newKey)
+            startPoints = temp
+            steps += 1
+            if all(key[2] == "Z" for key in startPoints):
+                return steps
+
+
+
+
+    
+
+
 readFile()
 #print(inp)
 #print(traversal)
-print(calcSteps())
+#print(calcSteps("GNK"))
+print(calcSteps2())
             
