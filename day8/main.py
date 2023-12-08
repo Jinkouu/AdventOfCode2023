@@ -14,26 +14,14 @@ def readFile():
                 open_paren_index = lines.index("(")
                 close_paren_index = lines.index(")")
 
-                # Extract substrings
+                # Extract substrings, use E1 as dict key and E2, E3 as a tuple data entry
                 E1 = lines[:equal_index].strip()
                 E2, E3 = map(str.strip, lines[open_paren_index + 1:close_paren_index].split(","))
                 traversal[E1] = (E2, E3)
-                #traversal.append((E1, E2, E3))
 
-#def getLeft(current):
-#    for route in traversal: # for each entry in traversal
-#        if current[1] == route[0]:
-#            return route
-#    return
-#
-#def getRight(current):
-#    for route in traversal: # for each entry in traversal
-#        if current[2] in route[0]:
-#            return route
-#    return
 
-def calcSteps1(currentKey):
-    current = traversal[currentKey]
+def calcSteps1():
+    currentKey = "AAA"
     steps = 0
     finished = False
     #print(current)
@@ -42,11 +30,9 @@ def calcSteps1(currentKey):
             if "L" in direction:
                 #current = getLeft(current)
                 currentKey = traversal[currentKey][0]
-                current = traversal[currentKey]
                 steps += 1
             else:
                 currentKey = traversal[currentKey][1]
-                current = traversal[currentKey]
                 steps += 1
 
             #also check if it is at the destination (ZZZ)
@@ -64,11 +50,9 @@ def calcSteps(currentKey):
             if "L" in direction:
                 #current = getLeft(current)
                 currentKey = traversal[currentKey][0]
-                current = traversal[currentKey]
                 steps += 1
             else:
                 currentKey = traversal[currentKey][1]
-                current = traversal[currentKey]
                 steps += 1
 
             #also check if it is at the destination (ZZZ)
@@ -89,6 +73,6 @@ def calcSteps2():
 
 
 readFile()
-print("Part 1:", calcSteps("GNK"))
+print("Part 1:", calcSteps1())
 print("Part 2:", calcSteps2())
             
