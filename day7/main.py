@@ -35,6 +35,10 @@ def readFile():
                 type = 1
             else:
                 type = 0
+            
+            if 'J' in newLine[0]:
+                if type < 6:
+                type += newLine[0].count('J')
             #print(type)
                 
             #    for point in order.keys():
