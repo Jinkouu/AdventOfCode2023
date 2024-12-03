@@ -51,13 +51,13 @@ def readFile():
 
 import re
 def readFile2():
-    with open("test2.txt") as input:
+    with open("input.txt") as input:
         input = input.read()
         #print(input)
         results = []
 
         #use regex this time
-        pattern = r"mul\([^)]*\)|do\(\)|don't\(\)" #first part gets mul(*,*), second gets do(), third part gets don't()
+        pattern = r"mul\(\d{1,3},\d{1,3}\)|do\(\)|don't\(\)" #first part gets mul(*,*), second gets do(), third part gets don't()
 
         matches = re.findall(pattern, input)
         
@@ -78,7 +78,7 @@ def readFile2():
                 if expression[i] == "(":
                     j = i + 1
                     digits1 = ""
-                    while j < len(expression) and expression[j].isdigit() and j-1 <= 3: #finds up to 3 digits
+                    while j < len(expression) and expression[j].isdigit() and len(digits1) < 3: #finds up to 3 digits
                         digits1 += expression[j]
                         j += 1
 
@@ -89,7 +89,7 @@ def readFile2():
 
                     k = j
                     digits2 = ""
-                    while k < len(expression) and expression[k].isdigit() and k-j <= 3: #finds up to 3 digits
+                    while k < len(expression) and expression[k].isdigit() and len(digits2) < 3: #finds up to 3 digits
                         digits2 += expression[k]
                         k += 1
 
