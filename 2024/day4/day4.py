@@ -94,12 +94,79 @@ def readFile():
                         matrix[j-2][i-1] = "M" 
                         matrix[j-3][i] = "X"
 
-        printMatrix(matrix)
+        #printMatrix(matrix)
         print(f"part 1 XMAS count: {count}")
         #for line in input:
+
+def readFile2():
+    with open("input.txt") as input:
+        input = input.readlines()
+        rows = len(input)
+        cols = len(input[0].strip())
+        matrix = [["." for _ in range(cols)] for _ in range(rows)] #call matrix using rows and then columns
+        count = 0
+
+        #mas mas
+        for j in range(0,len(input)): #rows
+            for i in range(0, len(input[j])): # columns
+                if j - 2 >= 0 and i - 2 >= 0:
+                    if (input[j][i-2] == "S" and input[j-1][i-1] == "A" and input[j-2][i] == "M" and
+                        input[j][i] == "S" and input[j-2][i-2] == "M"):
+                        count += 1
+                        matrix[j][i-2]= "S"
+                        matrix[j-2][i] = "M"
+                        matrix[j][i] = "S"
+                        matrix[j-1][i-1] = "A"
+                        matrix[j-2][i-2] = "M"
+        
+        #mas sam
+        for j in range(0,len(input)): #rows
+            for i in range(0, len(input[j])): # columns
+                if j - 2 >= 0 and i - 2 >= 0:
+                    if (input[j-2][i] == "S" and input[j-1][i-1] == "A" and input[j][i-2] == "M" and
+                        input[j][i] == "S" and input[j-2][i-2] == "M"):
+                        count += 1
+                        matrix[j-2][i]= "S"
+                        matrix[j][i-2] = "M"
+                        matrix[j][i] = "S"
+                        matrix[j-1][i-1] = "A"
+                        matrix[j-2][i-2] = "M"
+
+        #sam mas
+        for j in range(0,len(input)): #rows
+            for i in range(0, len(input[j])): # columns
+                if j - 2 >= 0 and i - 2 >= 0:
+                    if (input[j][i-2] == "S" and input[j-1][i-1] == "A" and input[j-2][i] == "M" and
+                        input[j-2][i-2] == "S" and input[j][i] == "M"):
+                        count += 1
+                        matrix[j][i-2]= "S"
+                        matrix[j-2][i] = "M"
+                        matrix[j-2][i-2] = "S"
+                        matrix[j-1][i-1] = "A"
+                        matrix[j][i] = "M"
+        
+        #sam sam 
+        for j in range(0,len(input)): #rows
+            for i in range(0, len(input[j])): # columns
+                if j - 2 >= 0 and i - 2 >= 0:
+                    if (input[j-2][i] == "S" and input[j-1][i-1] == "A" and input[j][i-2] == "M" and
+                        input[j-2][i-2] == "S" and input[j][i] == "M"):
+                        count += 1
+                        matrix[j][i-2]= "S"
+                        matrix[j-2][i] = "M"
+                        matrix[j-2][i-2] = "S"
+                        matrix[j-1][i-1] = "A"
+                        matrix[j][i] = "M"
+
+
+        #printMatrix(matrix)
+        print(f"part 2 XMAS count: {count}")
+
+
 
 def printMatrix(matrix):
     for row in matrix:
         print(row)
 
 readFile()
+readFile2()
